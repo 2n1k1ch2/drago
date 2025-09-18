@@ -7,7 +7,8 @@ import (
 )
 
 func help() {
-	fmt.Println("Usage: drago [command]")
+	fmt.Println("Usage: drago [command] " +
+		"")
 }
 
 func version() {
@@ -15,7 +16,10 @@ func version() {
 }
 
 func inject() {
-	paths := os.Args[1:]
+	if len(os.Args) < 2 {
+		fmt.Printf("too few arguments\n")
+	}
+	paths := os.Args[2:]
 	injector.Build(paths)
 }
 func main() {
