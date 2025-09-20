@@ -1,4 +1,4 @@
-package drago
+package main
 
 import (
 	"drago/internal/injector"
@@ -32,7 +32,7 @@ func main() {
 	case "inject":
 		inject()
 	default:
-		fmt.Printf("Unkown command: %s\n", command)
+		fmt.Printf("Unknown command: %s\n", command)
 	}
 
 }
