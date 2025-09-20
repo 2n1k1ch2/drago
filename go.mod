@@ -1,5 +1,10 @@
 module drago
 
-go 1.22
+go 1.24.0
 
-require github.com/dave/dst v0.27.3 // indirect
+toolchain go1.24.3
+
+require (
+	github.com/dave/dst v0.27.3 // indirect
+	golang.org/x/tools v0.37.0 // indirect
+)
