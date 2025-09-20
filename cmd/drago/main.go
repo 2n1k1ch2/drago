@@ -1,4 +1,4 @@
-package drago
+package main
 
 import (
 	"drago/internal/injector"
