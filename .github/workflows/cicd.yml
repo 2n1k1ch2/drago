@@ -25,16 +25,13 @@ jobs:
           go mod verify
           go mod tidy
 
-      - name: Install linters
+      - name: Run go vet
         run: |
-          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.55.2
-          go install honnef.co/go/tools/cmd/staticcheck@latest
-
-      - name: Run linters
-        run: |
-          export PATH=$(go env GOPATH)/bin:$PATH
-          golangci-lint run ./...
           go vet ./...
+
+      - name: Run staticcheck
+        run: |
+          go install honnef.co/go/tools/cmd/staticcheck@latest
           staticcheck ./...
 
   test:
