@@ -29,10 +29,11 @@ jobs:
         run: |
           go vet ./...
 
-      - name: Run staticcheck
+      - name: Run linters
         run: |
-          go install honnef.co/go/tools/cmd/staticcheck@latest
-          staticcheck ./...
+          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.54.2
+          golangci-lint run ./...
+          go vet ./...
 
   test:
     runs-on: ubuntu-latest
