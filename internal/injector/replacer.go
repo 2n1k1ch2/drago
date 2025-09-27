@@ -31,6 +31,7 @@ func (r *replacer) Replace(file *os.File) error {
 		return err
 	}
 
+	r.addDragoImport(f)
 	r.replaceGoStatements(f)
 
 	r.replaceChanelStatements(f)
