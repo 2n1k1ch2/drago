@@ -26,6 +26,6 @@ func CurrentMode() Mode {
 }
 func RecordEvent(e event.Event) {
 	if currentMode == ModeRecord {
-
+		recorder.Record(e)
 	}
 }
