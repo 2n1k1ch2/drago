@@ -9,4 +9,5 @@ type EventBuffer interface {
 	Flush(batchSize int) error  // flush buffer
 	Len() uint32
 	Close() error // end and free resource
+	Out() <-chan []event.Event
 }
