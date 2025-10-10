@@ -12,6 +12,10 @@ func (g GoEvent) Seq() uint64 {
 	return g.seq
 }
 
+func (g GoEvent) Type() string {
+	return "GoEvent"
+}
+
 type ChanEvent struct {
 	id     string
 	seq    uint64
@@ -24,6 +28,9 @@ func (c ChanEvent) ID() string {
 }
 func (g ChanEvent) Seq() uint64 {
 	return g.seq
+}
+func (g ChanEvent) Type() string {
+	return "ChanEvent"
 }
 
 type TimerEvent struct {
@@ -39,4 +46,24 @@ func (g TimerEvent) ID() string {
 }
 func (g TimerEvent) Seq() uint64 {
 	return g.seq
+}
+func (g TimerEvent) Type() string {
+	return "TimerEvent"
+}
+
+type MutexEvent struct {
+	id     string
+	seq    uint64
+	Action string
+}
+
+func (m MutexEvent) ID() string {
+	return m.id
+}
+func (g MutexEvent) Seq() uint64 {
+	return g.seq
+}
+
+func (g MutexEvent) Type() string {
+	return "MutexEvent"
 }
