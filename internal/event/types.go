@@ -15,10 +15,3 @@ type Event interface {
 	Seq() uint64
 	Type() string
 }
-type isEvent_EventType interface {
-	isEvent_EventType()
-}
-type Event_Go struct{ Go *GoEvent }
-type Event_Chan struct{ Chan *ChanEvent }
-type Event_Timer struct{ Timer *TimerEvent }
-type Event_Mutex struct{ Mutex *MutexEvent }
