@@ -3,12 +3,13 @@ package recorder
 import (
 	"drago/internal/buffer"
 	"drago/internal/event"
+	"drago/internal/writer"
 	"log"
 )
 
 type Recorder struct {
 	buf    buffer.EventBuffer
-	writer *Writer
+	writer *writer.Writer
 	ch     chan<- []event.Event
 }
 

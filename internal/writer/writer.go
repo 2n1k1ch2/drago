@@ -2,9 +2,9 @@ package writer
 
 import (
 	"drago/internal/event"
-	"os"
+	dragoproto "drago/internal/proto"
 	"google.golang.org/protobuf/proto"
-	"drago/internal/proto"
+	"os"
 )
 
 type Writer struct {
@@ -20,7 +20,7 @@ func NewWriter(path string) (*Writer, error) {
 }
 
 func (w *Writer) Write(batch []event.Event) error {
-	pbBatch := convertToProto(batch)
+	pbBatch := dragoproto.ConvertToProto(batch)
 	data, err := proto.Marshal(pbBatch)
 	if err != nil {
 		return err
