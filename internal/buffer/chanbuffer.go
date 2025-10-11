@@ -47,3 +47,6 @@ func (c *ChanBuffer) Close() error {
 func (c *ChanBuffer) Len() uint32 {
 	return uint32(len(c.batch))
 }
+func (c *ChanBuffer) Out() <-chan []event.Event {
+	return c.ch
+}

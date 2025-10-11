@@ -13,4 +13,5 @@ const (
 type Event interface {
 	ID() string
 	Seq() uint64
+	Type() string
 }
