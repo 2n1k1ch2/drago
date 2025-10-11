@@ -1,0 +1,38 @@
+syntax = "proto3";
+option go_package = "/proto;Event_PB";
+package EventPB;
+message GoEvent {
+  string routine_id = 1;
+  uint64 seq =2;
+}
+
+message ChanEvent {
+  string chan_id = 1;
+  uint64 seq = 2;
+  string direction = 3;
+  bytes  payload = 4;
+}
+
+message TimerEvent {
+  string timer_id=1;
+  uint64 seq =2;
+  string action =3;
+  int64  duration=4;
+  int64  returned_time=5;
+}
+message MutexEvent {
+  string mutex_id = 1;
+  string op = 2;
+}
+message Event {
+
+  oneof event_type {
+    GoEvent go = 10;
+    ChanEvent chan = 11;
+    MutexEvent mutex = 12;
+    TimerEvent timer =13;
+  }
+}
+message EventBatch {
+  repeated Event events = 1;
+}
