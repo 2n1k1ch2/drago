@@ -2,32 +2,48 @@ package proto
 
 import (
 	"drago/internal/event"
-	"google.golang.org/protobuf/proto"
+	EventPB "drago/internal/proto/proto" // корректное имя пакета protobuf
 )
 
-func ConvertToProto(e event.Event) *proto.Event {
-	pb := &proto.{
-		Seq: e.Seq(),
-		Id:  e.ID(),
-	}
+func ConvertToProto(e event.Event) *EventPB.Event {
+	pb := &EventPB.Event{}
 
 	switch ev := e.(type) {
-	case *GoEvent:
-		pb.EventType = &proto.Event_Go{
-			Go: &proto.GoEvent{RoutineId: ev.RoutineID},
+	case event.GoEvent:
+		pb.EventType = &EventPB.Event_Go{
+			Go: &EventPB.GoEvent{
+				RoutineId: ev.ID(),
+				Seq:       ev.Seq(),
+			},
 		}
-	case *ChanEvent:
-		pb.EventType = &proto.Event_Chan{
-			Chan: &proto.ChanEvent{ChanId: ev.ChanID, Direction: ev.Direction},
+	case event.ChanEvent:
+		pb.EventType = &EventPB.Event_Chan{
+			Chan: &EventPB.ChanEvent{
+				ChanId:    ev.ID(),
+				Seq:       ev.Seq(),
+				Direction: ev.Action,
+				Payload:   ev.Value,
+			},
 		}
-	}
-	case *MutexEvent:
-		pb.EventType = &proto.Event_Mutex{
-		Mutex: &proto.MutexEvent{MutexId: ev.MutexID},
-	}
-	case *TimerEvent:
-		pb.EventType = &proto.Event_Timer{
-		Timer: &proto.TimerEvent{TimerId: ev.TimerID},
+	case event.MutexEvent:
+		pb.EventType = &EventPB.Event_Mutex{
+			Mutex: &EventPB.MutexEvent{
+				MutexId: ev.ID(),
+				Op:      ev.Action,
+			},
+		}
+	case event.TimerEvent:
+		pb.EventType = &EventPB.Event_Timer{
+			Timer: &EventPB.TimerEvent{
+				TimerId:      ev.ID(),
+				Seq:          ev.Seq(),
+				Action:       ev.Action,
+				Duration:     ev.Duration,
+				ReturnedTime: ev.ReturnedTime,
+			},
+		}
+	default:
+
 	}
 
 	return pb

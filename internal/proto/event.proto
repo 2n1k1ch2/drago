@@ -1,6 +1,6 @@
 syntax = "proto3";
-option go_package = "drago/internal/proto;proto";
-package drago;
+option go_package = "/proto;Event_PB";
+package EventPB;
 message GoEvent {
   string routine_id = 1;
   uint64 seq =2;
